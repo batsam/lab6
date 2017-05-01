@@ -16,6 +16,7 @@
         <a class="nav-link" href="#">Services</a>
         <a class="nav-link" href="#">About</a>
         <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" href="/posts/create">Create Post</a>
         <a class="nav-link" href="#">Login</a>
       </nav>
     </div>
