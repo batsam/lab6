@@ -33,6 +33,11 @@ class PostsController extends Controller
         // $post->body=$request->input('body');
         // $post->save();
         // return redirect('/');
+        // $this->validate(request(),[
+        $this->validate($request,[
+            'title'=>"required",
+            'body'=>'required'
+            ]);
 
         Post::create(request(['title','body']));
         return redirect('/');
@@ -47,37 +52,38 @@ class PostsController extends Controller
         return view('posts.show',compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        // get post from database
+        $post=Post::find($id);
+        // show post in edit view
+        return view('posts.edit',compact('post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        // Find the post by id
+        $post=Post::find($id);
+        // Validate 
+        $this->validate($request,[
+            'title'=>"required",
+            'body'=>'required'
+            ]);
+        // Update the post
+        $post->title=$request->input('title');
+        $post->body=$request->input('body');
+        $post->save();
+        //Redirect to home page
+        return redirect('/');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        //Find post by id
+        $post=Post::find($id);
+        //Delete post
+        $post->delete();
+        //Redirect to home page
+        return redirect('/');
     }
 }
