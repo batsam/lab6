@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\Auth;
+
 class PostsController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware('auth')->except(['index','show']);
+    }
+    
     public function index()
     {
         // Show all posts
         // get post
-        $posts=Post::all();
+        // $posts=Post::all();
+        $posts=Post::Paginate(3);
         return view('posts.index',compact('posts'));
 
     }
@@ -39,7 +46,10 @@ class PostsController extends Controller
             'body'=>'required'
             ]);
 
-        Post::create(request(['title','body']));
+        Post::create([
+            'title'=>request('title'),
+            'body'=>request('body'),
+            'user_id'=>auth()->user()->id]);
         return redirect('/');
 
     }
