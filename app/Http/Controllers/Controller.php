@@ -1,5 +1,5 @@
 <?php
-
+use App\Task;
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;

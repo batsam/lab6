@@ -29,15 +29,14 @@ show page
 				{{ csrf_field() }}
 				<input type="hidden" name="post_id" id="post_id" value="{{$post->id}}">
 				<div class="form-group">
-					<textarea id ="body" name="body" placeholder="Add your comment." class="form-control">
-					</textarea>
+					<textarea id ="body" name="body" placeholder="Add your comment." class="form-control"></textarea>
 				</div>
 				<div class="form-group">
 					<button id="comment" class="btn btn-primary">Add Comment</button>
 				</div>
 			</form>
 		</div>
-		
+
 	</div>
 </div><!-- /.blog-post -->
 </div><!-- /.blog-main -->
@@ -47,8 +46,8 @@ show page
 
 <script>
 	$(document).ready(function() {
-		$('#comment').click(function(event) {	
-			event.preventDefault();	
+		$('#comment').click(function(event) {
+			event.preventDefault();
 			var bod = $('#body').val();
 			var id = $('#post_id').val();
 			$.ajax({
@@ -71,6 +70,3 @@ show page
 
 
 @endsection
-
-
-

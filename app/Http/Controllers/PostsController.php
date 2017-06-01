@@ -12,7 +12,7 @@ class PostsController extends Controller
     public function __construct(){
         $this->middleware('auth')->except(['index','show']);
     }
-    
+
     public function index()
     {
         // Show all posts
@@ -46,17 +46,26 @@ class PostsController extends Controller
             'body'=>'required'
             ]);
 
-        Post::create([
-            'title'=>request('title'),
-            'body'=>request('body'),
-            'user_id'=>auth()->user()->id]);
-        return redirect('/');
+        Post::create(
+          ['title'=>$request->title,
+            'body'=>$request->body,
+            'user_id'=>auth()->user()->id
+          ]);
+          // $create=Post::orderBy('id','desc')->first();
+        // return Response::json;
+
+      //   $create=Post::orderBy('created_at', 'desc')->first();
+      // //  $create['created_at_format']=$create->created_at->diffForHumans();
+      //   return Response::json($create);
+      if($request->ajax()){
+        return Response($request->all());
+      }
 
     }
 
     public function show(Post $post)
     {
-        // Show the Post 
+        // Show the Post
         // get posts/{post}
         // $post=Post::find($id);
         return view('posts.show',compact('post'));
@@ -74,7 +83,7 @@ class PostsController extends Controller
     {
         // Find the post by id
         $post=Post::find($id);
-        // Validate 
+        // Validate
         $this->validate($request,[
             'title'=>"required",
             'body'=>'required'
