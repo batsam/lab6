@@ -49,7 +49,7 @@ create page
 					console.log(data);
 
 					// $("#frm_create").append('<h1>+Created+''</h1>');
-					$('#frm_create').trigger("reset").append('<div class="alert alert-success" role="alert"> <strong>Well done!</strong> You successfully create a post <a href="/posts/{post}" class="alert-link">See your Post</a>. </div>');
+					$('#frm_create').trigger("reset").append('<div class="alert alert-success" role="alert"> <strong>Well done!</strong> You successfully create a post <a href="/" class="alert-link">See Post</a>. </div>');
 				},
 				error: function (xhr, ajaxOptions, thrownError) {
            console.log(xhr.status);
